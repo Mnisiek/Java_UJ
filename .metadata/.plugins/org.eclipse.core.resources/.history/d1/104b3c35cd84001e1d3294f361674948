@@ -1,0 +1,118 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Indiana implements Explorer {
+	int underwater_moves_allowed;
+	PlayerController controller;
+
+	@Override
+	public void underwaterMovesAllowed(int moves) {
+		this.underwater_moves_allowed = moves;
+	}
+
+	@Override
+	public void setPlayerController(PlayerController controller) {
+		this.controller = controller;
+	}
+
+	@Override
+	public void findExit() {
+		Map<Position, String> visited_fields = new HashMap<Position, String>();
+		Position current_position = new Position(0, 0);
+		int current_underwater_moves = 0;
+		boolean must_step_back = false;
+		Direction next_direction = Direction.NORTH;
+		
+		List<Direction> available_moves = new ArrayList<Direction>();
+		available_moves.add(Direction.NORTH);
+		available_moves.add(Direction.WEST);
+		available_moves.add(Direction.SOUTH);
+		available_moves.add(Direction.EAST);
+		
+		//sout
+		while (true) {
+			for (Direction current_direction: available_moves) {
+				if (visited_fields.containsKey(current_position)) {
+					continue;
+				}
+				if (must_step_back) {
+					try {
+						this.controller.move(next_direction);
+					} catch (OnFire e) {
+						
+					} catch (Flooded e) {
+						
+					} catch (Wall e) {
+						
+					} catch (Exit e) {
+
+					}
+					current_position = next_direction.step(current_position);
+					must_step_back = false;
+				}
+				try {
+					this.controller.move(current_direction);
+					// dodac, ze juz tu bylismy - wtedy sie tam nie ruszamy
+				} catch (Wall e) {
+					// dodajemy pole o znaczniku "Wall", nie zmieniamy obecnej pozycji gracza
+					visited_fields.put(current_direction.step(current_position), "Wall");
+					continue;
+				} catch (OnFire e) {
+					// dodajemy pole o znaczniku "Onfire"
+					visited_fields.put(current_direction.step(current_position), "OnFire");
+					current_position = current_direction.step(current_position);
+					next_direction = reverseDirection(current_direction);
+					must_step_back = true;
+					continue;
+				} catch (Flooded e) {
+					// dodajemy pole o znaczniku "Flooded", aktualizujemy obecna pozycje
+					visited_fields.put(current_direction.step(current_position), "Flooded");
+					if (current_underwater_moves < this.underwater_moves_allowed / 2)  {
+						++current_underwater_moves;
+						current_position = current_direction.step(current_position);
+					} else {
+						current_direction = reverseDirection(current_direction);
+						for (; current_underwater_moves > 0; --current_underwater_moves) {
+							try {
+								this.controller.move(current_direction);
+							} catch (OnFire e1) {
+
+							} catch (Flooded e1) {
+
+							} catch (Wall e1) {
+		
+							} catch (Exit e1) {
+
+							}
+							current_position = current_direction.step(current_position);
+							
+						}
+					}
+					continue;
+				} catch (Exit e) {
+					// znalezlismy wyjscie z labiryntu
+					return;
+				}
+				
+				current_position = current_direction.step(current_position);
+			}
+		}
+		
+	}
+
+
+	Direction reverseDirection(Direction direction) {
+		if (direction.equals(Direction.NORTH))
+			return Direction.SOUTH;
+		else if (direction.equals(Direction.SOUTH))
+			return Direction.NORTH;
+		else if (direction.equals(Direction.EAST))
+			return Direction.WEST;
+		else if (direction.equals(Direction.WEST))
+			return Direction.EAST;
+		else
+			return Direction.NORTH;
+	}
+}

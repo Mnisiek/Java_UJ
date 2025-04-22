@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="synchronized"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="true"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="synchronized"/>
+			<item value="zadanie"/>
+			<item value="histograms"/>
+			<item value="runningThreads"/>
+			<item value="we"/>
+			<item value="WE"/>
+			<item value="wait"/>
+			<item value="waitForAvailableThread"/>
+			<item value="createRunnable"/>
+			<item value="startNewThread"/>
+			<item value="lock"/>
+			<item value="System.out"/>
+			<item value="printValue"/>
+			<item value="current_direction.step(current_position)"/>
+			<item value="available_moves"/>
+		</list>
+		<list key="replacehistory">
+			<item value="Zadanie"/>
+			<item value="wyniki"/>
+			<item value="dzialajaceWatki"/>
+			<item value="watkowyEksp"/>
+			<item value="WatkowyEksperymentator"/>
+			<item value="czekajNaDostepneWatki"/>
+			<item value="utworzObiektRunnable"/>
+			<item value="uruchomNowyWatek"/>
+			<item value=""/>
+			<item value="printStatement"/>
+			<item value="availableMoves"/>
+			<item value="currentDirection"/>
+			<item value="currentUnderwaterMoves"/>
+			<item value="currentPosition"/>
+			<item value="visitedFields"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="464"/>
+		<item key="DIALOG_Y_ORIGIN" value="541"/>
+		<item key="DIALOG_WIDTH" value="322"/>
+		<item key="DIALOG_HEIGHT" value="383"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="545"/>
+		<item key="DIALOG_Y_ORIGIN" value="384"/>
+	</section>
+</section>
